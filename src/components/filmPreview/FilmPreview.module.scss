@@ -1,0 +1,24 @@
+.filmCover {
+  max-height: 735px;
+  overflow-y: hidden;
+  
+}
+.filmCoverImage {
+  display: block;
+  margin-top: -230px;
+  filter: brightness(60%);
+  user-select: none;
+  pointer-events: none;
+}
+.filmLogo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  pointer-events: none;
+}

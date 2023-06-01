@@ -1,0 +1,53 @@
+.film {
+  min-height: 100vh;
+}
+.filmContainer {
+  position: relative;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+.containerStyle {
+  background: #000;
+  min-height: 100vh;
+  background-color: #000000;
+}
+.filmBody {
+
+}
+.filmBodyContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 1480px;
+  margin: 0 auto;
+}
+.filmInfo {
+  flex: 0 0 30%;
+}
+.filmSloganTitle {
+  padding: 10px 0;
+  font-size: 30px;
+  color: #fff;
+}
+.filmInfoTitle {
+  padding: 10px 0;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: #fff;
+}
+.filmInfoDescription {
+  padding: 10px 0;
+  color: #fff;
+  font-size: 18px;
+}
+.filmInfoRatingTitle {
+  padding: 10px 0;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: #fff;
+}
+.filmInfoRating {
+  color: #fff;
+  font-size: 18px;
+}

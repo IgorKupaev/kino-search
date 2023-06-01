@@ -1,0 +1,40 @@
+.mainFilms {
+  background-color: transparent;
+}
+.mainFilmsContainer {
+  padding: 40px 13px 5px 13px;
+  display: flex;
+  justify-content: space-between;
+}
+.mainFilmsFilm {
+  max-width: 102px;
+  padding: 5px 0;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 11px;
+  color: #ffffff;
+  text-align: center;
+  user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-30px);
+    .mainFilmsFilmPoster {
+      box-shadow: 0px 0px 10px #dc4c4c;
+    }
+  }
+}
+.mainFilmsFilmPoster {
+  margin-bottom: 7px;
+  border-radius: 10px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
