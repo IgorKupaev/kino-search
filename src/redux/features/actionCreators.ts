@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import type { ErrorApi, ICurrentFilm, IProfession } from "@/types";
+import type { ErrorApi, ICurrentFilm } from "@/types";
 
 const APIKEY = "3a026247-976f-47c6-817c-0604bf6f1d0d";
 const baseUrl = "https://kinopoiskapiunofficial.tech/api/v2.2/films";
@@ -46,6 +46,34 @@ export const fetchFilm = createAsyncThunk<
 export const fetchProfessions = createAsyncThunk("fetchProfessions", async (id: number) => {
   try {
     const response = await axios.get(`${baseUrl2}/staff?filmId=${id}`, {
+      headers: {
+        accept: "application/json",
+        "X-API-KEY": APIKEY,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+});
+
+export const fetchPremiers = createAsyncThunk("fetchPremiers", async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/premieres?year=2023&month=JUNE`, {
+      headers: {
+        accept: "application/json",
+        "X-API-KEY": APIKEY,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+});
+
+export const fetchWallpapers = createAsyncThunk("fetchWallpapers", async (ids: number[]) => {
+  try {
+    const response = await axios.get(`${baseUrl}/premieres?year=2023&month=JUNE`, {
       headers: {
         accept: "application/json",
         "X-API-KEY": APIKEY,
