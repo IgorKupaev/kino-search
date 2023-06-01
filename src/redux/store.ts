@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import topFilmsReducer from "./features/topFilmsSlice";
+import premiersReducer from "./features/premiersSlice";
 import currentFilmReducer from "./features/currentFilmSlice";
-import currentProfessions from "./features/currentProfessions";
+import currentProfessionsReducer from "./features/currentProfessions";
 
 export const store = configureStore({
   reducer: {
     topFilms: topFilmsReducer,
+    premiers: premiersReducer,
     currentFilm: currentFilmReducer,
-    currentProfessions: currentProfessions
+    currentProfessions: currentProfessionsReducer
   },
 });
 
