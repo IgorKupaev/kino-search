@@ -1,6 +1,6 @@
 # **Kino Search** - educational project
 
-This is a pet project that I use to get practice with new technologies. I used **Next v13** with app router and few libraries for React that never used before.
+This is a pet project that I use to get practice with new technologies. I used **Next v13** with app router and a few libraries for React that never used before.
 
 There is using public **<a href='https://kinopoiskapiunofficial.tech/'>Kinopoisk API Unofficial</a>**.
 
