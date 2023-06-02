@@ -13,7 +13,6 @@ import type { FC } from 'react';
 
 const Home: FC = (): JSX.Element => {
   const films = useAppSelector(Selectors.changeSize);
-  console.log(films);
 
   return (
     <>

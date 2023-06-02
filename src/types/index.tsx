@@ -64,6 +64,8 @@ export interface topFilmsState {
   isLoading: boolean;
   error: string;
   films: film[];
+  wallpapersIds?: number[]
+  wallpapersLinks?: string[]
 }
 
 export interface IRootProps {
