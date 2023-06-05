@@ -10,3 +10,6 @@ There is using public **<a href='https://kinopoiskapiunofficial.tech/'>Kinopoisk
     Next: v13.4,
 ## **Usage**
     Dev mode: 'npm run dev'
+### **API**
+    You can use moch api or unofficial public kinopoisk api
+Docs will be upgraded later :)
