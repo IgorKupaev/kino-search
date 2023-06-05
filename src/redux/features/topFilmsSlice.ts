@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchTopFilms } from "./mochThunks";
 
-import type { TTopFilmsState } from "@/types";
+import type { TFilm, TTopFilmsState } from "@/types";
 
 const initialState: TTopFilmsState = {
   isLoading: false,
@@ -22,7 +22,7 @@ export const topFilms = createSlice({
       .addCase(fetchTopFilms.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = '';
-        state.films = payload.films;
+        state.films = payload;
       })
       .addCase(fetchTopFilms.rejected, (state, { payload }) => {
         state.isLoading = false;

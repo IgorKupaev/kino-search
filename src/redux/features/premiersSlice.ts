@@ -22,12 +22,12 @@ export const premiers = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchPremiers.fulfilled, (state, { payload }) => {
-        const wallpapersIds = [];
-        for (let i = payload.pagesCount - 1; i > payload.pagesCount - 6; i--) {
-          wallpapersIds.push(payload.films[i].filmId);
+        const wallpapersIds: number[] = [];
+        for (let i = payload.length - 8; i > payload.length - 15; i--) {
+          wallpapersIds.push(payload[i].filmId);
         }
         state.isLoading = false;
-        state.films = payload.films;
+        state.films = payload;
         state.wallpapersIds = wallpapersIds;
       })
       .addCase(fetchPremiers.rejected, (state, { payload }) => {
@@ -41,9 +41,10 @@ export const premiers = createSlice({
       })
       .addCase(fetchWallpapers.fulfilled, (state, { payload }) => {
         const result: string[] = [];
-        JSON.parse(JSON.stringify(payload)).forEach((item: { data: TWallpapersData }) => {
-          if (item.data.total > 0) {
-            result.push(item.data.items[0].imageUrl);
+        console.log(JSON.parse(JSON.stringify(payload)))
+        JSON.parse(JSON.stringify(payload)).forEach((item: { data: TWallpapersData[] }) => {
+          if (item.data[0].total > 0) {
+            result.push(item.data[0].items[0].imageUrl);
           }
         });
         state.isLoading = false;

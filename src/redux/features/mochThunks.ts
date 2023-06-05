@@ -5,17 +5,10 @@ import type { TErrorApi, TCurrentFilm, TProfession, TFilm } from "@/types";
 
 const baseUrl = "http://localhost:3005";
 
-export const fetchTopFilms = createAsyncThunk<
-  {
-    films: TFilm[];
-  },
-  string,
-  {
-    rejectValue: TErrorApi;
-  }
->("fetchFilms", async (_, { rejectWithValue }) => {
+export const fetchTopFilms = createAsyncThunk<TFilm[]>("fetchFilms", async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${baseUrl}/topFilms`);
+    console.log(response.data);
     return response.data;
   } catch (e) {
     rejectWithValue(e as TErrorApi);
@@ -52,9 +45,12 @@ export const fetchProfessions = createAsyncThunk<
   }
 });
 
-export const fetchPremiers = createAsyncThunk("fetchPremiers", async () => {
+export const fetchPremiers = createAsyncThunk<
+  TFilm[]
+>("fetchPremiers", async () => {
   try {
     const response = await axios.get(`${baseUrl}/premiers`);
+    console.log(response.data);
     return response.data;
   } catch (error: any) {
     return error.response.data;
@@ -83,5 +79,6 @@ export const fetchWallpapers = createAsyncThunk<
     .catch((e) => {
       result = e;
     });
+
   return JSON.parse(JSON.stringify(result));
 });
