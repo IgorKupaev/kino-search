@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface ICurrentFilm {
+export type TCurrentFilm = {
   coverUrl: string;
   posterUrl: string;
   posterUrlPreview: string;
@@ -23,7 +23,7 @@ export interface ICurrentFilm {
   year: number;
 }
 
-export interface IProfession {
+export type TProfession = {
   staffId: number;
   nameRu: string;
   nameEn: string;
@@ -33,74 +33,74 @@ export interface IProfession {
   professionKey: string;
 }
 
-export type State = {
+export type TState = {
   id: string;
   isLoading: boolean;
   error: string;
-  film?: ICurrentFilm;
+  film?: TCurrentFilm;
 };
-export interface ErrorApi {
+export type TErrorApi = {
   error: number;
   message: string;
 }
 
-export interface genre {
+export type TGenre = {
   genre: string;
 }
 
-export interface film {
+export type TFilm = {
   filmId: number;
   nameRu: string;
   nameEn: string;
   year: string;
-  genres: genre[];
+  genres: TGenre[];
   rating: string;
   ratingVoteCount: number;
   posterUrl: string;
   posterUrlPreview: string;
 }
 
-export interface topFilmsState {
+export type TTopFilmsState = {
   isLoading: boolean;
   error: string;
-  films: film[];
+  films: TFilm[];
   wallpapersIds?: number[]
   wallpapersLinks?: string[]
 }
 
-export interface IRootProps {
+export type TRootProps = {
   children: React.ReactNode;
 }
 
-export interface IMainFilmsProps {
-  films: film[];
+export type TMainFilmsProps = {
+  films: TFilm[];
 }
 
-export interface IHeaderNavProps {
+export type THeaderNavProps = {
   itemsStyle: string;
   authStyle: string;
 }
 
-export interface IHeaderProps {
+export type THeaderProps = {
   isTransparent?: boolean;
 }
 
-export interface IMainFilmsItemProps {
+export type TMainFilmsItemProps = {
   fetchFilm: () => void;
-  film: film;
+  film: TFilm;
   src: string;
 }
 
-export interface IMaimFilmsListProps {
-  films: film[];
+export type TMaimFilmsListProps = {
+  films: TFilm[];
 }
 
-export interface IFilmPreviewProps {
+export type TFilmPreviewProps = {
   cover: string;
   logo: string;
   width: number;
   height: number;
-  film: ICurrentFilm;
+  film: TCurrentFilm;
 }
 
 export type TSize = {
@@ -108,12 +108,23 @@ export type TSize = {
   height: number;
 };
 
-export interface ITrailerProps {
+export type TTrailerProps = {
   title: string;
   id: string;
 }
-export interface ProfessionState {
+export type TProfessionState = {
   isLoading: boolean;
   error: string;
-  professions: IProfession[]
+  professions: TProfession[]
 }
+
+export type TWallpaperItem = {
+  imageUrl: string;
+  previewUrl: string;
+};
+
+export type TWallpapersData = {
+  total: number;
+  totalPages: number;
+  items: TWallpaperItem[];
+};

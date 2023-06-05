@@ -3,14 +3,14 @@ import React from "react";
 import Link from "next/link";
 
 import type { FC } from "react";
-import type { IHeaderNavProps } from "@/types";
+import type { THeaderNavProps } from "@/types";
 
 import logo from "./../../../public/headerLogo.png";
 
 import styles from "./Header.module.scss";
 import Image from "next/image";
 
-const HeaderNav: FC<IHeaderNavProps> = ({ itemsStyle, authStyle }): JSX.Element => {
+const HeaderNav: FC<THeaderNavProps> = ({ itemsStyle, authStyle }): JSX.Element => {
   return (
     <>
       <nav className={styles.headerNav}>

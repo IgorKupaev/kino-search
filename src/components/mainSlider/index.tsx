@@ -6,7 +6,7 @@ import { Navigation, A11y, Autoplay } from "swiper";
 import Image from "next/image";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchPremiers, fetchWallpapers } from "@/redux/features/thunks";
+import { fetchPremiers, fetchWallpapers } from "@/redux/features/mochThunks";
 
 import styles from "./MainSlider.module.scss";
 
@@ -26,7 +26,7 @@ const MainSlider = (): JSX.Element => {
   }, [wallpapersIds?.length]);
   const wallpapersLinks = useAppSelector((state) => state.premiers.wallpapersLinks);
 
-  if (wallpapersIds === undefined) return <div>loading...</div>;
+  if (wallpapersIds === undefined) return <div className={styles.mainSliderLoading}>loading...</div>;
 
   return (
     <div className={styles.mainSlider}>

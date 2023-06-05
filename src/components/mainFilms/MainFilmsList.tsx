@@ -5,10 +5,10 @@ import { useAppDispatch } from "@/redux/hooks";
 
 import MainFilmsItem from "./MainFilmsItem";
 
-import type { IMaimFilmsListProps } from "@/types";
+import type { TMaimFilmsListProps } from "@/types";
 import type { FC } from "react";
 
-const MainFilmsList: FC<IMaimFilmsListProps> = ({ films }): JSX.Element => {
+const MainFilmsList: FC<TMaimFilmsListProps> = ({ films }): JSX.Element => {
   const dispatch = useAppDispatch();
   return (
     <>

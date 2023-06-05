@@ -1,32 +1,37 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchTopFilms } from "./mochThunks";
 
-import type { topFilmsState } from "@/types";
+import type { TFilm, TTopFilmsState } from "@/types";
 
-const initialState = {
+const initialState: TTopFilmsState = {
   isLoading: false,
   error: "",
   films: [],
-} as topFilmsState;
+};
 
 export const topFilms = createSlice({
-  name: "currentFilm",
+  name: "top-films",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchTopFilms.fulfilled.type]: (state, action: PayloadAction<any>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-      state.films = action.payload.films;
-    },
-    [fetchTopFilms.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchTopFilms.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTopFilms.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchTopFilms.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = '';
+        state.films = payload;
+      })
+      .addCase(fetchTopFilms.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        if (typeof payload === "string") {
+          state.error = payload;
+        } else {
+          state.error = "Unknown error";
+        }
+      });
   },
 });
 

@@ -6,7 +6,7 @@ module Selectors {
   export const currentFilm = (s: RootState) => s.currentFilm.film;
 
   export const changeSize = createSelector(topFilms, (tf) => {
-    return tf.length > 0 ? tf.slice(0, 12) : [];
+    return tf?.length > 0 ? tf.slice(0, 12) : [];
   });
 }
 export default Selectors;
