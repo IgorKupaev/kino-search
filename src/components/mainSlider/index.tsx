@@ -3,6 +3,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y, Autoplay } from "swiper";
+import Image from "next/image";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchPremiers, fetchWallpapers } from "@/redux/features/thunks";
@@ -39,8 +40,8 @@ const MainSlider = (): JSX.Element => {
         >
           {wallpapersLinks?.map((link) => (
             <SwiperSlide key={link}>
-              <div style={{ maxHeight: 736 }}>
-                <img src={link} alt="film" />
+              <div style={{ height: 1236, position: 'relative' }}>
+                <Image priority fill src={link} alt="film" />
               </div>
             </SwiperSlide>
           ))}
