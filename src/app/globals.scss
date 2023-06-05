@@ -2,6 +2,16 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+
+  --swiper-navigation-size: 25px;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 40px;
+  --swiper-navigation-color: #FFFFFF;
+}
+.swiper-button-next, .swiper-button-prev {
+  background-color: #4B0601;
+  padding: 30px;
+  border-radius: 100%;
 }
 html,
 body {
