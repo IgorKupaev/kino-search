@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProfessions } from "./actionCreators";
+import { fetchProfessions } from "./mochThunks";
 import { ProfessionState } from "@/types";
 
 const initialState: ProfessionState = {

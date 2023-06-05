@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchPremiers, fetchWallpapers } from "./actionCreators";
+import { fetchPremiers, fetchWallpapers } from "./mochThunks";
 
 import type { topFilmsState } from "@/types";
 

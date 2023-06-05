@@ -6,7 +6,7 @@ import styles from './FilmDescription.module.scss';
 import { ICurrentFilm, IProfession } from '@/types';
 import InfoBlock from './InfoBlock';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { fetchProfessions } from '@/redux/features/actionCreators';
+import { fetchProfessions } from '@/redux/features/thunks';
 
 interface IFilmDescriptionProps {
   film: ICurrentFilm

@@ -4,7 +4,7 @@ import type { FC } from "react";
 import type { IMainFilmsProps } from "@/types";
 
 import { useAppDispatch } from "@/redux/hooks";
-import { fetchTopFilms } from "@/redux/features/actionCreators";
+import { fetchTopFilms } from "@/redux/features/thunks";
 
 import MainFilmsList from "./MainFilmsList";
 
