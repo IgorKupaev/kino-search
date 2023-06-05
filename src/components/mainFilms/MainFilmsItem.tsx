@@ -16,7 +16,6 @@ const MainFilmsItem: FC<IMainFilmsItemProps> = ({ fetchFilm, film, src }): JSX.E
           className={styles.mainFilmsFilmPoster}
           width={102}
           height={154}
-          loader={() => src}
           src={src}
           alt={film.nameEn || film.nameRu}
         />
