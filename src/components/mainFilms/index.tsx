@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { FC } from "react";
-import type { IMainFilmsProps } from "@/types";
+import type { TMainFilmsProps } from "@/types";
 
 import { useAppDispatch } from "@/redux/hooks";
 import { fetchTopFilms } from "@/redux/features/thunks";
@@ -12,7 +12,7 @@ import styles from "./MainFilms.module.scss";
 
 const loaderElement = <h2 style={{ color: "#fff" }}>Loading...</h2>;
 
-const MainFilms: FC<IMainFilmsProps> = ({ films }): JSX.Element => {
+const MainFilms: FC<TMainFilmsProps> = ({ films }): JSX.Element => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {

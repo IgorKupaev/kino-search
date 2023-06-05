@@ -3,11 +3,11 @@ import React from "react";
 import Image from "next/image";
 
 import type { FC } from "react";
-import type { IFilmPreviewProps } from "@/types";
+import type { TFilmPreviewProps } from "@/types";
 
 import styles from './FilmPreview.module.scss';
 
-const FilmPreview: FC<IFilmPreviewProps> = ({ cover, logo, width, height, film }): JSX.Element => {
+const FilmPreview: FC<TFilmPreviewProps> = ({ cover, logo, width, height, film }): JSX.Element => {
   console.log('CURRENT LOGO', logo)
   return (
     <div className={styles.filmPreview}>

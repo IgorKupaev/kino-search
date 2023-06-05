@@ -3,13 +3,13 @@ import React from 'react';
 import type { FC } from 'react';
 
 import styles from './FilmDescription.module.scss';
-import { ICurrentFilm, IProfession } from '@/types';
+import { TCurrentFilm, TProfession } from '@/types';
 import InfoBlock from './InfoBlock';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchProfessions } from '@/redux/features/thunks';
 
 interface IFilmDescriptionProps {
-  film: ICurrentFilm
+  film: TCurrentFilm
 }
 
 enum profs {

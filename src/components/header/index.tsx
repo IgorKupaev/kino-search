@@ -3,11 +3,11 @@ import React from "react";
 import HeaderNav from "./HeaderNav";
 
 import type { FC } from "react";
-import type { IHeaderProps } from "@/types";
+import type { THeaderProps } from "@/types";
 
 import styles from "./Header.module.scss";
 
-const Header: FC<IHeaderProps> = ({ isTransparent = false }): JSX.Element => {
+const Header: FC<THeaderProps> = ({ isTransparent = false }): JSX.Element => {
   const itemsStyle = React.useMemo(() => {
     return isTransparent ? styles.none : styles.headerNavItem;
   }, [isTransparent]);

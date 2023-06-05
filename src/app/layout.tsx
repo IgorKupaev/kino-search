@@ -4,13 +4,13 @@ import { store } from "../redux/store";
 import { Provider } from "react-redux";
 
 import type { FC } from "react";
-import type { IRootProps } from "@/types";
+import type { TRootProps } from "@/types";
 
 import styles from "./page.module.scss";
 
 import "./globals.scss";
 
-const RootLayout: FC<IRootProps> = ({ children }): JSX.Element => {
+const RootLayout: FC<TRootProps> = ({ children }): JSX.Element => {
   return (
     <html lang="en">
       <head>

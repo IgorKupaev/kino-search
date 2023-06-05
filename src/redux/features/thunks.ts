@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import type { ErrorApi, ICurrentFilm } from "@/types";
+import type { TErrorApi, TCurrentFilm } from "@/types";
 
-const APIKEY = ["3a026247-976f-47c6-817c-0604bf6f1d0d", "c2d9875f-04e6-4b71-99ee-63e470297702", "d9b76a32-33a6-4c7e-984e-8fbb4b110d27", "55247b0c-e9f9-41ea-baba-6dbf6f82bcb4","8bdf1a15-6d79-482f-8f69-0320181c6b89"][4];
+const APIKEY = ["3a026247-976f-47c6-817c-0604bf6f1d0d", "c2d9875f-04e6-4b71-99ee-63e470297702", "d9b76a32-33a6-4c7e-984e-8fbb4b110d27", "55247b0c-e9f9-41ea-baba-6dbf6f82bcb4","8bdf1a15-6d79-482f-8f69-0320181c6b89"][3];
 const baseUrl = "https://kinopoiskapiunofficial.tech/api/v2.2/films";
 const baseUrl2 = "https://kinopoiskapiunofficial.tech/api/v1";
 
@@ -22,10 +22,10 @@ export const fetchTopFilms = createAsyncThunk("fetchFilms", async () => {
 });
 
 export const fetchFilm = createAsyncThunk<
-  ICurrentFilm,
+  TCurrentFilm,
   string,
   {
-    rejectValue: ErrorApi;
+    rejectValue: TErrorApi;
   }
 >("fetchFilm", async (id, { rejectWithValue }) => {
   try {
@@ -90,5 +90,5 @@ export const fetchWallpapers = createAsyncThunk("fetchWallpapers", async (ids: n
   }).catch(e => {
     result = e;
   });
-  return result;
+  return JSON.parse(JSON.stringify(result));
 });

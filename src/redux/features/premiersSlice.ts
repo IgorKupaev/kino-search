@@ -2,58 +2,61 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchPremiers, fetchWallpapers } from "./mochThunks";
 
-import type { topFilmsState } from "@/types";
+import type { TWallpapersData, TTopFilmsState } from "@/types";
 
-const initialState = {
+const initialState: TTopFilmsState = {
   isLoading: false,
   error: "",
   films: [],
   wallpapersIds: [],
-  wallpapersLinks: []
-} as topFilmsState;
+  wallpapersLinks: [],
+};
 
 export const premiers = createSlice({
   name: "premiers",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchPremiers.fulfilled.type]: (state, { payload }) => {
-      state.isLoading = false;
-      state.films = payload.films;
-
-      console.log(payload)
-
-      const wallpapersIds = [];
-      for (let i = payload.pagesCount - 1; i > payload.pagesCount - 6; i--) {
-        wallpapersIds.push(payload.films[i].filmId)
-      }
-      state.wallpapersIds = wallpapersIds;
-    },
-    [fetchPremiers.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchPremiers.rejected.type]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
-
-    [fetchWallpapers.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchWallpapers.fulfilled.type]: (state, { payload }) => {
-      state.isLoading = false;
-      const result: string[] = [];
-      payload.forEach((item: { data: { total: number; items: any[]; }; }) => {
-        if (item.data.total > 0) {
-          result.push(item.data.items[0].imageUrl)
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPremiers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchPremiers.fulfilled, (state, { payload }) => {
+        const wallpapersIds = [];
+        for (let i = payload.pagesCount - 1; i > payload.pagesCount - 6; i--) {
+          wallpapersIds.push(payload.films[i].filmId);
+        }
+        state.isLoading = false;
+        state.films = payload.films;
+        state.wallpapersIds = wallpapersIds;
+      })
+      .addCase(fetchPremiers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        if (typeof payload === "string") {
+          state.error = payload;
         }
       })
-      state.wallpapersLinks = result
-    },
-    [fetchWallpapers.rejected.type]: (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    },
+      .addCase(fetchWallpapers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchWallpapers.fulfilled, (state, { payload }) => {
+        const result: string[] = [];
+        JSON.parse(JSON.stringify(payload)).forEach((item: { data: TWallpapersData }) => {
+          if (item.data.total > 0) {
+            result.push(item.data.items[0].imageUrl);
+          }
+        });
+        state.isLoading = false;
+        state.wallpapersLinks = result;
+      })
+      .addCase(fetchWallpapers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        if (typeof payload === "string") {
+          state.error = payload;
+        } else {
+          state.error = "Unknown error";
+        }
+      });
   },
 });
 

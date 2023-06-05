@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchFilm } from "./mochThunks";
-import { State } from "@/types";
+import { TState } from "@/types";
 
-const initialState: State = {
+const initialState: TState = {
   id: "",
   isLoading: false,
   error: "",
@@ -11,7 +11,7 @@ const initialState: State = {
 };
 
 export const currentFilm = createSlice({
-  name: "currentFilm",
+  name: "top-films",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -31,7 +31,11 @@ export const currentFilm = createSlice({
       })
       .addCase(fetchFilm.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload ? payload.message : "Unknown error";
+        if (typeof payload === "string") {
+          state.error = payload;
+        } else {
+          state.error = "Unknown error";
+        }
       });
   },
 });
