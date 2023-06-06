@@ -1,22 +1,22 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import Selectors from "@/redux/Selectors";
 import { useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
 
 import FilmPreview from "@/components/filmPreview";
-import { calculateSize, setRatingColor } from "./helper";
-
-import type { FC } from "react";
-import type { TSize } from "@/types";
-
-import styles from "./Film.module.scss";
 import VideoTrailers from "@/components/videoTrailers";
 import FilmDescription from "@/components/filmDescription";
 
-const Film: FC = (): JSX.Element => {
+import { calculateSize } from "./helper";
+
+import styles from "./Film.module.scss";
+
+import type { TSize } from "@/types";
+
+const Film = (): JSX.Element => {
   const [size, setSize] = React.useState<TSize>({ width: 0, height: 0 });
   const [cover, setCover] = React.useState<string>("");
   const [logo, setLogo] = React.useState<string>("");

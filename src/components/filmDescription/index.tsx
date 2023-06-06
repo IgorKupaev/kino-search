@@ -1,32 +1,29 @@
-import React from 'react';
+import React from "react";
 
-import type { FC } from 'react';
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchProfessions } from "@/redux/features/thunks";
 
-import styles from './FilmDescription.module.scss';
-import { TCurrentFilm, TProfession } from '@/types';
-import InfoBlock from './InfoBlock';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { fetchProfessions } from '@/redux/features/thunks';
+import InfoBlock from "./InfoBlock";
 
-interface IFilmDescriptionProps {
-  film: TCurrentFilm
-}
+import styles from "./FilmDescription.module.scss";
+
+import type { IFilmDescriptionProps } from "@/types";
 
 enum profs {
   director = "DIRECTOR",
-  writer = "WRITER"
+  writer = "WRITER",
 }
 
-const FilmDescription: FC<IFilmDescriptionProps> = ({ film }): JSX.Element => {
+const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const id = Number(useAppSelector((state) => state.currentFilm.id));
   const professions = useAppSelector((state) => state.currentProfessions.professions);
 
-  const [director, setDirector] = React.useState<string>('');
-  const [writer, setWriter] = React.useState<string>('');
+  const [director, setDirector] = React.useState<string>("");
+  const [writer, setWriter] = React.useState<string>("");
 
   React.useEffect(() => {
-    dispatch(fetchProfessions(id));
+    dispatch(fetchProfessions(String(id)));
   }, [dispatch, id]);
 
   React.useEffect(() => {
@@ -37,25 +34,25 @@ const FilmDescription: FC<IFilmDescriptionProps> = ({ film }): JSX.Element => {
       const searchedWriter = professions.find((prof) => prof.professionKey === profs.writer);
       if (searchedWriter) setWriter(searchedWriter.nameEn || searchedWriter.nameRu);
     }
-  }, [professions])
+  }, [professions]);
 
   return (
     <div className={styles.filmBody}>
-    <div className={styles.filmBodyContainer}>
-      <div className={styles.filmInfo}>
-        <h2 className={styles.filmSloganTitle}>{film?.slogan}</h2>
-        <h3 className={styles.filmInfoTitle}>overview</h3>
-        <div className={styles.filmInfoDescription}>
-          <div>{film?.description}</div>
+      <div className={styles.filmBodyContainer}>
+        <div className={styles.filmInfo}>
+          <h2 className={styles.filmSloganTitle}>{film?.slogan}</h2>
+          <h3 className={styles.filmInfoTitle}>overview</h3>
+          <div className={styles.filmInfoDescription}>
+            <div>{film?.description}</div>
+          </div>
+          <InfoBlock body={director} title={profs.director} />
+          <InfoBlock body={writer} title={profs.writer} />
+          <InfoBlock body={String(film.year)} title="Release Date" />
+          <InfoBlock body={String(film.filmLength) + " MINUTES"} title="Running Time" />
         </div>
-        <InfoBlock body={director} title={profs.director} />
-        <InfoBlock body={writer} title={profs.writer} />
-        <InfoBlock body={String(film.year)} title='Release Date' />
-        <InfoBlock body={String(film.filmLength) + ' MINUTES'} title='Running Time' />
       </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
 export default FilmDescription;

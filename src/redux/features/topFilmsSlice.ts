@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchTopFilms } from "./mochThunks";
+import { fetchTopFilms } from "./mockThunks";
 
-import type { TFilm, TTopFilmsState } from "@/types";
+import type { TTopFilmsState } from "@/types";
 
 const initialState: TTopFilmsState = {
   isLoading: false,

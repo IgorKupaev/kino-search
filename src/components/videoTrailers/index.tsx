@@ -2,11 +2,9 @@ import React from "react";
 
 import Trailer from "./Trailer";
 
-import type { FC } from "react";
+import styles from "./VideoTrailers.module.scss";
 
-import styles from './VideoTrailers.module.scss';
-
-const VideoTrailers: FC = (): JSX.Element => {
+const VideoTrailers = (): JSX.Element => {
   return (
     <div className={styles.trailers}>
       <div className={styles.trailersContainer}>

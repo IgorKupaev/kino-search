@@ -1,14 +1,12 @@
 import React from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import type { FC } from "react";
-import type { TMainFilmsItemProps } from "@/types";
-
 import styles from "./MainFilms.module.scss";
 
-const MainFilmsItem: FC<TMainFilmsItemProps> = ({ fetchFilm, film, src }): JSX.Element => {
+import type { TMainFilmsItemProps } from "@/types";
+
+const MainFilmsItem = ({ fetchFilm, film, src }: TMainFilmsItemProps): JSX.Element => {
   return (
     <div className={styles.mainFilmsFilm} key={film.filmId}>
       <Link onClick={fetchFilm} href="/film">

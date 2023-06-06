@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProfessions } from "./mochThunks";
+import { fetchProfessions } from "./mockThunks";
 import { TProfessionState } from "@/types";
 
 const initialState: TProfessionState = {
@@ -10,7 +10,7 @@ const initialState: TProfessionState = {
 };
 
 export const currentProfessions = createSlice({
-  name: "currentProfessions",
+  name: "current-professions",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
