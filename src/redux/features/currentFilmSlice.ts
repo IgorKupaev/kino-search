@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchFilm } from "./mochThunks";
+import { fetchFilm } from "./mockThunks";
 import { TState } from "@/types";
 
 const initialState: TState = {

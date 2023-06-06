@@ -4,13 +4,14 @@ import type { FC } from "react";
 import type { TMainFilmsProps } from "@/types";
 
 import { useAppDispatch } from "@/redux/hooks";
-import { fetchTopFilms } from "@/redux/features/mochThunks";
+import { fetchTopFilms } from "@/redux/features/mockThunks";
 
 import MainFilmsList from "./MainFilmsList";
 
 import styles from "./MainFilms.module.scss";
+import { CircularProgress } from "@mui/material";
 
-const loaderElement = <h2 style={{ color: "#fff" }}>Loading...</h2>;
+const loaderElement = <h2 style={{ color: "#fff" }}><CircularProgress /></h2>;
 
 const MainFilms: FC<TMainFilmsProps> = ({ films }): JSX.Element => {
   const dispatch = useAppDispatch();

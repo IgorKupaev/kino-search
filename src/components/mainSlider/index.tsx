@@ -1,51 +1,35 @@
-"use client"
+"use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, A11y, Autoplay } from "swiper";
-import Image from "next/image";
+import React  from "react";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchPremiers, fetchWallpapers } from "@/redux/features/mochThunks";
+import { fetchPremiers, fetchWallpapers } from "@/redux/features/mockThunks";
+import Selectors from "@/redux/Selectors";
 
 import styles from "./MainSlider.module.scss";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
+import Slider from "./Slider";
+import { CircularProgress } from "@mui/material";
 
 const MainSlider = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const wallpapersIds = useAppSelector((state) => state.premiers.wallpapersIds);
+  const wallpapersIds = useAppSelector(Selectors.wallpapersIds);
+  const links = useAppSelector(Selectors.wallpapersLinks);
+
   const fetchAll = async () => {
     await dispatch(fetchPremiers());
     wallpapersIds && wallpapersIds.length && dispatch(fetchWallpapers(wallpapersIds));
   };
+
   React.useEffect(() => {
     fetchAll();
   }, [wallpapersIds?.length]);
-  const wallpapersLinks = useAppSelector((state) => state.premiers.wallpapersLinks);
 
-  if (wallpapersIds === undefined) return <div className={styles.mainSliderLoading}>loading...</div>;
+  if (!wallpapersIds?.length) return <div className={styles.mainSliderLoading}><CircularProgress /></div>;
 
   return (
     <div className={styles.mainSlider}>
       <div className={styles.mainSliderContainer}>
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={1}
-          modules={[Navigation, A11y, Autoplay]}
-          navigation
-          autoplay
-        >
-          {wallpapersLinks?.map((link) => (
-            <SwiperSlide key={link}>
-              <div style={{ height: 1236, position: 'relative' }}>
-                <Image priority fill src={link} alt="film" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Slider />
       </div>
     </div>
   );

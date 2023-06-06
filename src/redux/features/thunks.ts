@@ -19,84 +19,73 @@ const defaultConfig = {
   },
 };
 
-export const fetchTopFilms = createAsyncThunk<
-  {
-    films: TFilm[];
-  },
-  string,
-  {
-    rejectValue: TErrorApi;
+export const fetchTopFilms = createAsyncThunk<{ films: TFilm[] }, string, { rejectValue: TErrorApi }>(
+  "fetchFilms",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${baseUrl}/top?type=TOP_250_BEST_FILMS&page=1`, defaultConfig);
+      return response.data;
+    } catch (e) {
+      rejectWithValue(e as TErrorApi);
+    }
   }
->("fetchFilms", async (_, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(`${baseUrl}/top?type=TOP_250_BEST_FILMS&page=1`, defaultConfig);
-    return response.data;
-  } catch (e) {
-    rejectWithValue(e as TErrorApi);
-  }
-});
+);
 
-export const fetchFilm = createAsyncThunk<
-  TCurrentFilm,
-  string,
-  {
-    rejectValue: TErrorApi;
+export const fetchFilm = createAsyncThunk<TCurrentFilm, string, { rejectValue: TErrorApi }>(
+  "fetchFilm",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${baseUrl}/${id}`, defaultConfig);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e as TErrorApi);
+    }
   }
->("fetchFilm", async (id, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(`${baseUrl}/${id}`, defaultConfig);
-    return response.data;
-  } catch (e) {
-    return rejectWithValue(e as TErrorApi);
-  }
-});
+);
 
-export const fetchProfessions = createAsyncThunk<
-  TProfession[],
-  string,
-  {
-    rejectValue: TErrorApi;
+export const fetchProfessions = createAsyncThunk<TProfession[], string, { rejectValue: TErrorApi }>(
+  "fetchProfessions",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${baseUrl2}/staff?filmId=${id}`, defaultConfig);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e as TErrorApi);
+    }
   }
->("fetchProfessions", async (id, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(`${baseUrl2}/staff?filmId=${id}`, defaultConfig);
-    return response.data;
-  } catch (e) {
-    return rejectWithValue(e as TErrorApi);
+);
+
+export const fetchPremiers = createAsyncThunk<TFilm[], undefined, { rejectValue: TErrorApi }>(
+  "fetchPremiers",
+  async (_, { rejectWithValue }) => {
+    try {
+      // URL is not for premiers. It's temp solution coz there is no wallpapers for premiers in db
+      const response = await axios.get(`${baseUrl}/top?type=TOP_250_BEST_FILMS&page=1`, defaultConfig);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e as TErrorApi);
+    }
   }
-});
+);
 
-export const fetchPremiers = createAsyncThunk("fetchPremiers", async () => {
-  try {
-    // URL is not for premiers. It's temp solution coz there is no wallpapers for premiers in db
-    const response = await axios.get(`${baseUrl}/top?type=TOP_250_BEST_FILMS&page=1`, defaultConfig);
-    return response.data;
-  } catch (error: any) {
-    return error.response.data;
-  }
-});
+export const fetchWallpapers = createAsyncThunk<string[], number[], { rejectValue: TErrorApi }>(
+  "fetchWallpapers",
+  async (ids) => {
+    const promises: Promise<string>[] = [];
 
-export const fetchWallpapers = createAsyncThunk<
-  string[],
-  number[],
-  {
-    rejectValue: TErrorApi;
-  }
->("fetchWallpapers", async (ids) => {
-  const promises: Promise<string>[] = [];
-
-  ids.forEach((id) => {
-    const promise: Promise<string> = axios.get(`${baseUrl}/${id}/images?type=WALLPAPER&page=1`, defaultConfig);
-    promises.push(promise);
-  });
-  let result;
-
-  await Promise.all(promises)
-    .then((res) => {
-      result = res;
-    })
-    .catch((e) => {
-      result = e;
+    ids.forEach((id) => {
+      const promise: Promise<string> = axios.get(`${baseUrl}/${id}/images?type=WALLPAPER&page=1`, defaultConfig);
+      promises.push(promise);
     });
-  return JSON.parse(JSON.stringify(result));
-});
+    let result;
+
+    await Promise.all(promises)
+      .then((res) => {
+        result = res;
+      })
+      .catch((e) => {
+        result = e;
+      });
+    return JSON.parse(JSON.stringify(result));
+  }
+);

@@ -26,7 +26,7 @@ const FilmDescription: FC<IFilmDescriptionProps> = ({ film }): JSX.Element => {
   const [writer, setWriter] = React.useState<string>('');
 
   React.useEffect(() => {
-    dispatch(fetchProfessions(id));
+    dispatch(fetchProfessions(String(id)));
   }, [dispatch, id]);
 
   React.useEffect(() => {

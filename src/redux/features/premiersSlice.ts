@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchPremiers, fetchWallpapers } from "./mochThunks";
+import { fetchPremiers, fetchWallpapers } from "./mockThunks";
 
 import type { TWallpapersData, TTopFilmsState } from "@/types";
 
@@ -41,7 +41,6 @@ export const premiers = createSlice({
       })
       .addCase(fetchWallpapers.fulfilled, (state, { payload }) => {
         const result: string[] = [];
-        console.log(JSON.parse(JSON.stringify(payload)))
         JSON.parse(JSON.stringify(payload)).forEach((item: { data: TWallpapersData[] }) => {
           if (item.data[0].total > 0) {
             result.push(item.data[0].items[0].imageUrl);
