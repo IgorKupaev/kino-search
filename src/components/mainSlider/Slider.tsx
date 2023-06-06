@@ -13,10 +13,6 @@ import { CircularProgress } from "@mui/material";
 const Slider = (): JSX.Element => {
   const wallpapersLinks = useAppSelector(Selectors.wallpapersLinks);
 
-  if (!wallpapersLinks || wallpapersLinks.length === 0) {
-    return <h1 style={{ color: '#fff' }}><CircularProgress /></h1>
-  }
-
   return (
     <Swiper spaceBetween={0} slidesPerView={1} modules={[Navigation, A11y, Autoplay]} navigation autoplay>
       {wallpapersLinks?.map((link) => (
