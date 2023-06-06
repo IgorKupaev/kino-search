@@ -1,8 +1,7 @@
 import React from "react";
 import { A11y, Autoplay, Navigation } from "swiper";
-import { Swiper } from "swiper/react";
-
-import SliderItem from "./SliderItem";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
 
 import { useAppSelector } from "@/redux/hooks";
 import Selectors from "@/redux/Selectors";
@@ -16,7 +15,11 @@ const Slider = (): JSX.Element => {
   return (
     <Swiper spaceBetween={0} slidesPerView={1} modules={[Navigation, A11y, Autoplay]} navigation autoplay>
       {wallpapersLinks?.map((link) => (
-        <SliderItem key={link} link={link} />
+        <SwiperSlide>
+          <div style={{ height: 1236, position: "relative" }}>
+            <Image priority fill src={link} alt="film" />
+          </div>
+        </SwiperSlide>
       ))}
     </Swiper>
   );
