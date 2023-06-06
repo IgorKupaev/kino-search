@@ -1,13 +1,11 @@
 import React from "react";
-
 import Image from "next/image";
 
-import type { FC } from "react";
+import styles from "./FilmPreview.module.scss";
+
 import type { TFilmPreviewProps } from "@/types";
 
-import styles from './FilmPreview.module.scss';
-
-const FilmPreview: FC<TFilmPreviewProps> = ({ cover, logo, width, height, film }): JSX.Element => {
+const FilmPreview = ({ cover, logo, width, height, film }: TFilmPreviewProps): JSX.Element => {
   return (
     <div className={styles.filmPreview}>
       <div className={styles.filmCover}>

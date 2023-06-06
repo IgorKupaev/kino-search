@@ -1,14 +1,7 @@
-"use client";
-
-import React  from "react";
-
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchPremiers, fetchWallpapers } from "@/redux/features/mockThunks";
-import Selectors from "@/redux/Selectors";
+import React from "react";
 
 import styles from "./MainSlider.module.scss";
 import Slider from "./Slider";
-import { CircularProgress } from "@mui/material";
 
 const MainSlider = (): JSX.Element => {
   return (

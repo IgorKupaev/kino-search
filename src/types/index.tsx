@@ -128,3 +128,15 @@ export type TWallpapersData = {
   totalPages: number;
   items: TWallpaperItem[];
 };
+
+export type TMainFilmsStackProps = {
+  i: number
+}
+
+export type TSliderItemProps = {
+  link: string;
+};
+
+export type IFilmDescriptionProps = {
+  film: TCurrentFilm;
+}
