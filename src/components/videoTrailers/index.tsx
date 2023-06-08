@@ -3,13 +3,21 @@ import React from "react";
 import Trailer from "./Trailer";
 
 import styles from "./VideoTrailers.module.scss";
+import { useAppSelector } from "@/redux/hooks";
+import Selectors from "@/redux/Selectors";
 
 const VideoTrailers = (): JSX.Element => {
+  const trailers = useAppSelector(Selectors.trailers);
+  
   return (
     <div className={styles.trailers}>
       <div className={styles.trailersContainer}>
-        <Trailer id="HPHTQL6Wb3s" title="watch trailer" />
-        <Trailer id="AO86cNYJ4dI" title="watch second trailer" />
+        {trailers.length > 0 ? (
+          <>
+            <Trailer id={trailers[0]} title="watch trailer" />
+            <Trailer id={trailers[1]} title="watch second trailer" />
+          </>
+        ) : null}
       </div>
     </div>
   );

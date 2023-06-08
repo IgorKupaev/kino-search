@@ -21,7 +21,7 @@ export type TCurrentFilm = {
   imdbId: string;
   kinopoiskId: number;
   year: number;
-}
+};
 
 export type TProfession = {
   staffId: number;
@@ -31,22 +31,24 @@ export type TProfession = {
   posterUrl: string;
   professionText: string;
   professionKey: string;
-}
+};
 
 export type TState = {
   id: string;
   isLoading: boolean;
   error: string;
   film?: TCurrentFilm;
+  posters: TImageItem[];
+  trailers: string[]
 };
 export type TErrorApi = {
   error: number;
   message: string;
-}
+};
 
 export type TGenre = {
   genre: string;
-}
+};
 
 export type TFilm = {
   filmId: number;
@@ -58,42 +60,42 @@ export type TFilm = {
   ratingVoteCount: number;
   posterUrl: string;
   posterUrlPreview: string;
-}
+};
 
 export type TTopFilmsState = {
   isLoading: boolean;
   error: string;
   films: TFilm[];
-  wallpapersIds?: number[]
-  wallpapersLinks?: string[]
-}
+  wallpapersIds?: number[];
+  wallpapersLinks?: string[];
+};
 
 export type TRootProps = {
   children: React.ReactNode;
-}
+};
 
 export type TMainFilmsProps = {
   films: TFilm[];
-}
+};
 
 export type THeaderNavProps = {
   itemsStyle: string;
   authStyle: string;
-}
+};
 
 export type THeaderProps = {
   isTransparent?: boolean;
-}
+};
 
 export type TMainFilmsItemProps = {
   fetchFilm: () => void;
   film: TFilm;
   src: string;
-}
+};
 
 export type TMaimFilmsListProps = {
   films: TFilm[];
-}
+};
 
 export type TFilmPreviewProps = {
   cover: string;
@@ -101,7 +103,7 @@ export type TFilmPreviewProps = {
   width: number;
   height: number;
   film: TCurrentFilm;
-}
+};
 
 export type TSize = {
   width: number;
@@ -111,27 +113,27 @@ export type TSize = {
 export type TTrailerProps = {
   title: string;
   id: string;
-}
+};
 export type TProfessionState = {
   isLoading: boolean;
   error: string;
-  professions: TProfession[]
-}
+  professions: TProfession[];
+};
 
-export type TWallpaperItem = {
+export type TImageItem = {
   imageUrl: string;
   previewUrl: string;
 };
 
-export type TWallpapersData = {
+export type TImagesData = {
   total: number;
   totalPages: number;
-  items: TWallpaperItem[];
+  items: TImageItem[];
 };
 
 export type TMainFilmsStackProps = {
-  i: number
-}
+  i: number;
+};
 
 export type TSliderItemProps = {
   link: string;
@@ -139,4 +141,8 @@ export type TSliderItemProps = {
 
 export type IFilmDescriptionProps = {
   film: TCurrentFilm;
-}
+};
+
+export type TFilmPosters = {
+  posters: TImageItem[];
+};

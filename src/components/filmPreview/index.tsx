@@ -25,7 +25,7 @@ const FilmPreview = ({ cover, logo, width, height, film }: TFilmPreviewProps): J
           <Image
             className={styles.filmLogoImage}
             src={logo}
-            width={600}
+            width={600} // REMOVE CALCULATE SIZE FUNCTION TODO
             height={285}
             loader={() => logo}
             alt={film && film.nameRu ? `${film.nameRu}` : "film logo"}

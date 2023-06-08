@@ -1,8 +1,8 @@
 import React from "react";
 
-import type { FC } from "react";
-
 import styles from "./FilmDescription.module.scss";
+
+import type { FC } from "react";
 
 interface IInfoBlockProps {
   title: string

@@ -15,7 +15,7 @@ const Slider = (): JSX.Element => {
   return (
     <Swiper spaceBetween={0} slidesPerView={1} modules={[Navigation, A11y, Autoplay]} navigation autoplay>
       {wallpapersLinks?.map((link) => (
-        <SwiperSlide>
+        <SwiperSlide key={link}>
           <div style={{ height: 1236, position: "relative" }}>
             <Image priority fill src={link} alt="film" />
           </div>

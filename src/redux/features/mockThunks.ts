@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import type { TErrorApi, TCurrentFilm, TProfession, TFilm } from "@/types";
+import type { TErrorApi, TCurrentFilm, TProfession, TFilm, TImageItem } from "@/types";
 
 const baseUrl = "http://localhost:3005";
 
@@ -70,5 +70,31 @@ export const fetchWallpapers = createAsyncThunk<string[], number[], { rejectValu
       });
 
     return JSON.parse(JSON.stringify(result));
+  }
+);
+
+export const fetchPosters = createAsyncThunk<TImageItem[], string, { rejectValue: TErrorApi }>(
+  "fetchPosters",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/posters?filmId=${id}`)));
+      const result = response.data[0].items;
+      result.length = 6;
+      return result
+    } catch (e) {
+      return rejectWithValue(e as TErrorApi);
+    }
+  }
+);
+
+export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: TErrorApi }>(
+  "fetchTrailers",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/trailers?filmId=${id}`)));
+      return response.data[0].youtubeIds
+    } catch (e) {
+      return rejectWithValue(e as TErrorApi);
+    }
   }
 );
