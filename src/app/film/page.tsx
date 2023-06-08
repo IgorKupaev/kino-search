@@ -8,8 +8,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import FilmPreview from "@/components/filmPreview";
 import VideoTrailers from "@/components/videoTrailers";
 
-import { randomInteger } from "./helper";
-
 import styles from "./Film.module.scss";
 
 import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/mockThunks";

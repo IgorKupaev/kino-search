@@ -11,10 +11,10 @@ interface IInfoBlockProps {
 
 const InfoBlock: FC<IInfoBlockProps> = ({ title, body }): JSX.Element => {
   return (
-    <>
+    <div className={styles.infoBlock}>
       <h3 className={styles.jobTitle}>{title}</h3>
       <div className={styles.jobBody}>{body}</div>
-    </>
+    </div>
   );
 };
 
