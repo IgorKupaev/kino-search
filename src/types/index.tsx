@@ -41,6 +41,7 @@ export type TState = {
   posters: TImageItem[];
   trailers: string[]
   wallpapers: TImageItem[]
+  currentWallpaper: string
 };
 export type TErrorApi = {
   error: number;

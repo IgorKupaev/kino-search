@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./mockThunks";
 import type { TState } from "@/types";
+import { randomInteger } from "@/app/film/helper";
 
 const initialState: TState = { // error: TErrorApi TODO
   id: "",
@@ -10,7 +11,8 @@ const initialState: TState = { // error: TErrorApi TODO
   film: undefined,
   posters: [],
   trailers: [],
-  wallpapers: []
+  wallpapers: [],
+  currentWallpaper: ''
 };
 
 export const currentFilm = createSlice({
@@ -75,6 +77,7 @@ export const currentFilm = createSlice({
       })
       .addCase(fetchCurrentWallpapers.fulfilled, (state, { payload }) => {
         state.wallpapers = payload;
+        state.currentWallpaper = payload[randomInteger(0, payload.length - 1)].imageUrl
         state.error = '';
       })
       .addCase(fetchCurrentWallpapers.rejected, (state, { payload }) => {
