@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchFilm, fetchPosters, fetchTrailers } from "./mockThunks";
+import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./mockThunks";
 import type { TState } from "@/types";
 
 const initialState: TState = { // error: TErrorApi TODO
@@ -9,7 +9,8 @@ const initialState: TState = { // error: TErrorApi TODO
   error: "",
   film: undefined,
   posters: [],
-  trailers: []
+  trailers: [],
+  wallpapers: []
 };
 
 export const currentFilm = createSlice({
@@ -62,6 +63,21 @@ export const currentFilm = createSlice({
         state.error = '';
       })
       .addCase(fetchTrailers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        if (typeof payload === "string") {
+          state.error = payload;
+        } else {
+          state.error = "Unknown error";
+        }
+      })
+      .addCase(fetchCurrentWallpapers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCurrentWallpapers.fulfilled, (state, { payload }) => {
+        state.wallpapers = payload;
+        state.error = '';
+      })
+      .addCase(fetchCurrentWallpapers.rejected, (state, { payload }) => {
         state.isLoading = false;
         if (typeof payload === "string") {
           state.error = payload;

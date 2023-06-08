@@ -98,3 +98,12 @@ export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: T
     }
   }
 );
+
+export const fetchCurrentWallpapers = createAsyncThunk<TImageItem[], string, { rejectValue: TErrorApi }>(
+  "fetchCurrentWallpapers",
+  async (id) => {
+    const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/wallpapers?filmId=${id}`)));
+    console.log(response);
+    return response.data[0].items
+  }
+);

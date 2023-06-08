@@ -40,6 +40,7 @@ export type TState = {
   film?: TCurrentFilm;
   posters: TImageItem[];
   trailers: string[]
+  wallpapers: TImageItem[]
 };
 export type TErrorApi = {
   error: number;
@@ -98,10 +99,7 @@ export type TMaimFilmsListProps = {
 };
 
 export type TFilmPreviewProps = {
-  cover: string;
-  logo: string;
-  width: number;
-  height: number;
+  wallpaper: string;
   film: TCurrentFilm;
 };
 
