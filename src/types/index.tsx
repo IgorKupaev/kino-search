@@ -42,6 +42,7 @@ export type TState = {
   trailers: string[]
   wallpapers: TImageItem[]
   currentWallpaper: string
+  isActive: boolean
 };
 export type TErrorApi = {
   error: number;
