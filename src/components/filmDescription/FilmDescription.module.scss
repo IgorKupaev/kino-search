@@ -1,6 +1,9 @@
 .film {
   min-height: 100vh;
 }
+.filmBody {
+  flex: 0 0 700px;
+}
 .filmContainer {
   position: relative;
   max-width: 1480px;
@@ -18,9 +21,6 @@
 
   max-width: 1480px;
   margin: 0 auto;
-}
-.filmInfo {
-  flex: 0 0 30%;
 }
 .filmSloganTitle {
   padding: 10px 0;
@@ -53,4 +53,7 @@
 }
 .jobBody {
   color: #fff;
+}
+.infoBlock {
+  margin-bottom: 21px;
 }

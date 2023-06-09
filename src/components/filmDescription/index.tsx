@@ -34,6 +34,7 @@ const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
       const searchedWriter = professions.find((prof) => prof.professionKey === profs.writer);
       if (searchedWriter) setWriter(searchedWriter.nameEn || searchedWriter.nameRu);
     }
+    console.log(professions);
   }, [professions]);
 
   return (
@@ -49,6 +50,17 @@ const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
           <InfoBlock body={writer} title={profs.writer} />
           <InfoBlock body={String(film.year)} title="Release Date" />
           <InfoBlock body={String(film.filmLength) + " MINUTES"} title="Running Time" />
+          <div className={styles.filmInfoCast}>
+            <h3 className={styles.jobTitle}>Cast</h3>
+            <div className={styles.jobBody}>
+              {professions.map((cast, index, arr) => {
+                if (index === arr.length - 1) {
+                  return <span>{cast.nameRu || cast.nameEn}</span>
+                }
+                return <span>{cast.nameRu || cast.nameEn}, </span>
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

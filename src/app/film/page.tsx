@@ -1,49 +1,46 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
-
 import Selectors from "@/redux/Selectors";
-import { useAppSelector } from "@/redux/hooks";
 
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { clearState } from "@/redux/features/currentFilmSlice";
+import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/mockThunks";
+
+import FilmInfo from "@/components/filmInfo";
 import FilmPreview from "@/components/filmPreview";
 import VideoTrailers from "@/components/videoTrailers";
-import FilmDescription from "@/components/filmDescription";
-
-import { calculateSize } from "./helper";
 
 import styles from "./Film.module.scss";
 
-import type { TSize } from "@/types";
-
 const Film = (): JSX.Element => {
-  const [size, setSize] = React.useState<TSize>({ width: 0, height: 0 });
-  const [cover, setCover] = React.useState<string>("");
-  const [logo, setLogo] = React.useState<string>("");
-
   const film = useAppSelector(Selectors.currentFilm);
-  const router = useRouter();
+  const wallpaper = useAppSelector((state) => state.currentFilm.currentWallpaper);
+
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    calculateSize(setSize, window.innerWidth);
-  }, []);
-
-  React.useEffect(() => {
-    if (film?.coverUrl) {
-      setCover(film.coverUrl);
+    if (film?.kinopoiskId) {
+      let id = String(film.kinopoiskId);
+      dispatch(fetchPosters(id));
+      dispatch(fetchTrailers(id));
+      dispatch(fetchCurrentWallpapers(id));
     }
-    if (film?.logoUrl) {
-      setLogo(film.logoUrl);
-    }
-  }, [film, router]);
+  }, [film]);
 
+  React.useEffect(
+    () => () => {
+      dispatch(clearState());
+    },
+    []
+  );
   return (
     <div className={styles.film}>
       <div className={styles.filmContainer}>
-        {film && <FilmPreview cover={cover} logo={logo} width={size.width} height={size.height} film={film} />}
+        <FilmPreview wallpaper={wallpaper} film={film} />
+        <VideoTrailers />
+        <FilmInfo />
       </div>
-      {film && <VideoTrailers />}
-      {film && <FilmDescription film={film} />}
     </div>
   );
 };

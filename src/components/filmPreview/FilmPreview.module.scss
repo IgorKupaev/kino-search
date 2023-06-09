@@ -1,11 +1,15 @@
 .filmCover {
-  max-height: 735px;
-  overflow-y: hidden;
+  min-height: 735px;
+  max-height: 750px;
+  overflow: hidden;
+  position: relative;
+}
+.ImageContainer {
+  width: 120vw;
+  min-height: 120vh;
 }
 .filmCoverImage {
-  display: block;
-  margin-top: -230px;
-  filter: brightness(60%);
+  height: 120vh!important;
   user-select: none;
   pointer-events: none;
 }
@@ -20,4 +24,32 @@
   align-items: center;
   user-select: none;
   pointer-events: none;
+}
+.filmPreview {
+  position: relative;
+}
+.filmName {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 500;
+
+  font-size: 36px;
+  color: rgba(253, 253, 253);
+  opacity: 0.8;
+  user-select: none;
+  pointer-events: none;
+  padding-top: 50px;
+  font-style: italic;
+
+  text-shadow:
+  1px 1px 1px #000,
+  1px 0px 1px #000,
+  0px 1px 1px #000;
 }
