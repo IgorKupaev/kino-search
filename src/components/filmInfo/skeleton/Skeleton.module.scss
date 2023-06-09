@@ -1,0 +1,10 @@
+.skeletonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.skeletonPosters {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: 535px;
+}

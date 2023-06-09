@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./mockThunks";
-import type { TState } from "@/types";
+
 import { randomInteger } from "@/app/film/helper";
 
-const initialState: TState = { // error: TErrorApi TODO
+import type { TState } from "@/types";
+
+const initialState: TState = {
   id: "",
   isLoading: false,
   error: "",
@@ -12,13 +14,24 @@ const initialState: TState = { // error: TErrorApi TODO
   posters: [],
   trailers: [],
   wallpapers: [],
-  currentWallpaper: ''
+  currentWallpaper: "",
 };
 
 export const currentFilm = createSlice({
-  name: "top-films",
+  name: "currentFilm",
   initialState,
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.id = "";
+      state.isLoading = false;
+      state.error = "";
+      state.film = undefined;
+      state.posters = [];
+      state.trailers = [];
+      state.wallpapers = [];
+      state.currentWallpaper = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFilm.pending, (state) => {
@@ -29,7 +42,7 @@ export const currentFilm = createSlice({
         state.id = meta.arg;
         state.error = "";
         if (!payload.logoUrl) {
-          state.film = {...payload, logoUrl: ''};
+          state.film = { ...payload, logoUrl: "" };
         } else {
           state.film = payload;
         }
@@ -47,7 +60,7 @@ export const currentFilm = createSlice({
       })
       .addCase(fetchPosters.fulfilled, (state, { payload }) => {
         state.posters = payload;
-        state.error = '';
+        state.error = "";
       })
       .addCase(fetchPosters.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -62,7 +75,7 @@ export const currentFilm = createSlice({
       })
       .addCase(fetchTrailers.fulfilled, (state, { payload }) => {
         state.trailers = payload;
-        state.error = '';
+        state.error = "";
       })
       .addCase(fetchTrailers.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -77,8 +90,8 @@ export const currentFilm = createSlice({
       })
       .addCase(fetchCurrentWallpapers.fulfilled, (state, { payload }) => {
         state.wallpapers = payload;
-        state.currentWallpaper = payload[randomInteger(0, payload.length - 1)].imageUrl
-        state.error = '';
+        state.currentWallpaper = payload[randomInteger(0, payload.length - 1)].imageUrl;
+        state.error = "";
       })
       .addCase(fetchCurrentWallpapers.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -91,4 +104,5 @@ export const currentFilm = createSlice({
   },
 });
 
+export const { clearState } = currentFilm.actions;
 export default currentFilm.reducer;

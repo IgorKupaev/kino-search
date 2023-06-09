@@ -1,22 +1,21 @@
 "use client";
 
 import React from "react";
-
 import Selectors from "@/redux/Selectors";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { clearState } from "@/redux/features/currentFilmSlice";
+import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/mockThunks";
+
+import FilmInfo from "@/components/filmInfo";
 import FilmPreview from "@/components/filmPreview";
 import VideoTrailers from "@/components/videoTrailers";
 
 import styles from "./Film.module.scss";
 
-import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/mockThunks";
-import FilmInfo from "@/components/filmInfo";
-
 const Film = (): JSX.Element => {
   const film = useAppSelector(Selectors.currentFilm);
-  const wallpapers = useAppSelector(Selectors.currentWallpapers);
-  const wallpaper = useAppSelector(state => state.currentFilm.currentWallpaper);
+  const wallpaper = useAppSelector((state) => state.currentFilm.currentWallpaper);
 
   const dispatch = useAppDispatch();
 
@@ -29,12 +28,18 @@ const Film = (): JSX.Element => {
     }
   }, [film]);
 
+  React.useEffect(
+    () => () => {
+      dispatch(clearState());
+    },
+    []
+  );
   return (
     <div className={styles.film}>
       <div className={styles.filmContainer}>
-        {wallpapers.length > 0 && film && <FilmPreview wallpaper={wallpaper} film={film} />}
-        {film && <VideoTrailers />}
-        {film && <FilmInfo />}
+        <FilmPreview wallpaper={wallpaper} film={film} />
+        <VideoTrailers />
+        <FilmInfo />
       </div>
     </div>
   );

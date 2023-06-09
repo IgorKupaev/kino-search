@@ -101,7 +101,7 @@ export type TMaimFilmsListProps = {
 
 export type TFilmPreviewProps = {
   wallpaper: string;
-  film: TCurrentFilm;
+  film: TCurrentFilm | undefined;
 };
 
 export type TSize = {
