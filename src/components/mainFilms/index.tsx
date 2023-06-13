@@ -4,13 +4,11 @@ import MainFilmsList from "./MainFilmsList";
 
 import styles from "./MainFilms.module.scss";
 
-import type { TMainFilmsProps } from "@/types";
-
-const MainFilms = ({ films }: TMainFilmsProps): JSX.Element => {
+const MainFilms = (): JSX.Element => {
   return (
     <div className={styles.mainFilms}>
       <div className={styles.mainFilmsContainer}>
-        <MainFilmsList films={films} />
+        <MainFilmsList />
       </div>
     </div>
   );

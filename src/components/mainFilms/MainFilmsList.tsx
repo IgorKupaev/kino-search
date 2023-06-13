@@ -1,14 +1,14 @@
 import React from "react";
 
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchFilm } from "@/redux/features/currentFilm/thunks";
+import Selectors from "@/redux/selectors";
 
 import MainFilmsItem from "./MainFilmsItem";
 
-import type { TMaimFilmsListProps } from "@/types";
-
-const MainFilmsList = ({ films }: TMaimFilmsListProps): JSX.Element => {
+const MainFilmsList = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const films = useAppSelector(Selectors.changeSize);
   return (
     <>
       {films.map((film) => {

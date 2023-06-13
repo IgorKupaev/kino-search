@@ -24,6 +24,14 @@ const Home = (): JSX.Element => {
     wallpapersIds && wallpapersIds.length && dispatch(fetchWallpapers(wallpapersIds));
   };
 
+  const MainSliderComponent = React.useCallback(() => {
+    return wallpapers && wallpapers.length > 0 ? <MainSlider /> : <MainSliderLoading />;
+  }, [wallpapers]);
+
+  const MainFilmsComponent = React.useCallback(() => {
+    return films && films.length > 0 ? <MainFilms /> : <MainFilmsLoading />;
+  }, [films]);
+
   React.useEffect(() => {
     dispatch(fetchTopFilms());
   }, [dispatch]);
@@ -35,8 +43,8 @@ const Home = (): JSX.Element => {
   return (
     <>
       <Header />
-      {wallpapers && wallpapers.length > 0 ? <MainSlider /> : <MainSliderLoading />}
-      {films && films.length > 0 ? <MainFilms films={films} /> : <MainFilmsLoading />}
+      <MainSliderComponent />
+      <MainFilmsComponent />
     </>
   );
 };
