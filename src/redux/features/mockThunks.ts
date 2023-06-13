@@ -1,14 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { fetchData } from "./helper";
+
 import type { TErrorApi, TCurrentFilm, TProfession, TFilm, TImageItem } from "@/types";
 
 const baseUrl = "http://localhost:3005";
 
 export const fetchTopFilms = createAsyncThunk<TFilm[]>("fetchFilms", async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`${baseUrl}/topFilms`);
-    return response.data;
+    return await fetchData("topFilms");
   } catch (e) {
     rejectWithValue(e as TErrorApi);
   }
@@ -18,8 +19,7 @@ export const fetchFilm = createAsyncThunk<TCurrentFilm, string, { rejectValue: T
   "fetchFilm",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${baseUrl}/topFilms?filmId=${id}`);
-      return response.data;
+      return await fetchData(`/topFilms?filmId=${id}`);
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -30,8 +30,7 @@ export const fetchProfessions = createAsyncThunk<TProfession[], string, { reject
   "fetchProfessions",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${baseUrl}/professions?filmId=${id}`);
-      return response.data;
+      return await fetchData(`/professions?filmId=${id}`);
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -42,8 +41,7 @@ export const fetchPremiers = createAsyncThunk<TFilm[], undefined, { rejectValue:
   "fetchPremiers",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${baseUrl}/premiers`);
-      return response.data;
+      return await fetchData("/premiers");
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -77,10 +75,10 @@ export const fetchPosters = createAsyncThunk<TImageItem[], string, { rejectValue
   "fetchPosters",
   async (id, { rejectWithValue }) => {
     try {
-      const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/posters?filmId=${id}`)));
-      const result = response.data[0].items;
+      const response = await fetchData(`/posters?filmId=${id}`);
+      const result = response[0].items;
       result.length = 6;
-      return result
+      return result;
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -91,8 +89,8 @@ export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: T
   "fetchTrailers",
   async (id, { rejectWithValue }) => {
     try {
-      const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/trailers?filmId=${id}`)));
-      return response.data[0].youtubeIds
+      const response = await fetchData(`/trailers?filmId=${id}`);
+      return response[0].youtubeIds;
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -102,8 +100,7 @@ export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: T
 export const fetchCurrentWallpapers = createAsyncThunk<TImageItem[], string, { rejectValue: TErrorApi }>(
   "fetchCurrentWallpapers",
   async (id) => {
-    const response = JSON.parse(JSON.stringify(await axios.get(`${baseUrl}/wallpapers?filmId=${id}`)));
-    console.log(response);
-    return response.data[0].items
+    const response = await fetchData(`/wallpapers?filmId=${id}`);
+    return response[0].items;
   }
 );

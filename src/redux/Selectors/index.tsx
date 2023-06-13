@@ -9,6 +9,7 @@ module Selectors {
   export const posters = (s: RootState) => s.currentFilm.posters;
   export const trailers = (s: RootState) => s.currentFilm.trailers;
   export const currentWallpapers = (s: RootState) => s.currentFilm.wallpapers;
+  export const isActiveFilm = (s: RootState) => s.currentFilm.isActive;
 
   export const changeSize = createSelector(topFilms, (tf) => {
     return tf?.length > 0 ? tf.slice(0, 12) : [];

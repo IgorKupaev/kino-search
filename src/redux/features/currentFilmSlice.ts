@@ -15,6 +15,7 @@ const initialState: TState = {
   trailers: [],
   wallpapers: [],
   currentWallpaper: "",
+  isActive: false,
 };
 
 export const currentFilm = createSlice({
@@ -30,11 +31,13 @@ export const currentFilm = createSlice({
       state.trailers = [];
       state.wallpapers = [];
       state.currentWallpaper = "";
+      state.isActive = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFilm.pending, (state) => {
+        state.isActive = true;
         state.isLoading = true;
       })
       .addCase(fetchFilm.fulfilled, (state, { meta, payload }) => {

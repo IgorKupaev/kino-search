@@ -2,8 +2,6 @@
 
 This is a pet project that I use to get practice with new technologies. I used **Next v13** with app router and a few libraries for React that never used before.
 
-There is using public **<a href='https://kinopoiskapiunofficial.tech/'>Kinopoisk API Unofficial</a>**.
-
 ## **Dependecies**
     Node: v18.13.0,
     React: v18,
@@ -11,5 +9,3 @@ There is using public **<a href='https://kinopoiskapiunofficial.tech/'>Kinopoisk
 ## **Usage**
     Dev mode: 'npm run dev'
 ### **API**
-    You can use moch api or unofficial public kinopoisk api
-Docs will be upgraded later :)
