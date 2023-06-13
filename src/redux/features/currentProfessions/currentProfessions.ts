@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProfessions } from "./mockThunks";
+import { fetchProfessions } from "./thunks";
 import { TProfessionState } from "@/types";
 
 const initialState: TProfessionState = {

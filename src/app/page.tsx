@@ -2,9 +2,10 @@
 
 import React from "react";
 
-import { fetchPremiers, fetchTopFilms, fetchWallpapers } from "@/redux/features/mockThunks";
+import { fetchPremiers, fetchWallpapers } from "@/redux/features/premiers/thunks";
+import { fetchTopFilms } from "@/redux/features/topFilms/thunks";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Selectors from "@/redux/Selectors";
+import Selectors from "@/redux/selectors";
 
 import MainSliderLoading from "@/components/mainSlider/skeleton";
 import MainFilmsLoading from "@/components/mainFilms/skeleton";
@@ -15,8 +16,8 @@ import Header from "@/components/header";
 const Home = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const films = useAppSelector(Selectors.changeSize);
-  const wallpapersIds = useAppSelector(Selectors.wallpapersIds);
-  const wallpapers = useAppSelector(Selectors.wallpapersLinks);
+  const wallpapersIds = useAppSelector(Selectors.premiers.wallpapersIds);
+  const wallpapers = useAppSelector(Selectors.premiers.wallpapersLinks);
 
   const fetchAll = async () => {
     await dispatch(fetchPremiers());

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import { useAppSelector } from "@/redux/hooks";
-import Selectors from "@/redux/Selectors";
+import Selectors from "@/redux/selectors";
 
 import FilmPreviewLoading from "./skeleton";
 
@@ -11,9 +11,13 @@ import styles from "./FilmPreview.module.scss";
 import type { TFilmPreviewProps } from "@/types";
 
 const FilmPreview = ({ wallpaper, film }: TFilmPreviewProps): JSX.Element => {
-  const wallpapers = useAppSelector(Selectors.wallpapersLinks);
+  const wallpapers = useAppSelector(Selectors.premiers.wallpapersLinks);
 
-  if (!(wallpapers && wallpapers.length > 0 && wallpaper && film)) {
+  const isAllFetched = React.useMemo(() => {
+    return wallpapers && wallpapers.length > 0 && wallpaper && film;
+  }, [wallpaper, wallpapers]);
+
+  if (!isAllFetched) {
     return <FilmPreviewLoading />;
   }
 

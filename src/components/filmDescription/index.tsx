@@ -1,13 +1,14 @@
 import React from "react";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchProfessions } from "@/redux/features/thunks";
+import { fetchProfessions } from "@/redux/features/currentProfessions/thunks";
 
 import InfoBlock from "./InfoBlock";
 
 import styles from "./FilmDescription.module.scss";
 
 import type { IFilmDescriptionProps } from "@/types";
+import Selectors from "@/redux/selectors";
 
 enum profs {
   director = "DIRECTOR",
@@ -16,8 +17,8 @@ enum profs {
 
 const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const id = Number(useAppSelector((state) => state.currentFilm.id));
-  const professions = useAppSelector((state) => state.currentProfessions.professions);
+  const id = +useAppSelector(Selectors.currentFilm.id);
+  const professions = useAppSelector(Selectors.currentProfessions.professions);
 
   const [director, setDirector] = React.useState<string>("");
   const [writer, setWriter] = React.useState<string>("");
@@ -34,7 +35,6 @@ const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
       const searchedWriter = professions.find((prof) => prof.professionKey === profs.writer);
       if (searchedWriter) setWriter(searchedWriter.nameEn || searchedWriter.nameRu);
     }
-    console.log(professions);
   }, [professions]);
 
   return (
@@ -55,9 +55,9 @@ const FilmDescription = ({ film }: IFilmDescriptionProps): JSX.Element => {
             <div className={styles.jobBody}>
               {professions.map((cast, index, arr) => {
                 if (index === arr.length - 1) {
-                  return <span>{cast.nameRu || cast.nameEn}</span>
+                  return <span key={index}>{cast.nameRu || cast.nameEn}</span>
                 }
-                return <span>{cast.nameRu || cast.nameEn}, </span>
+                return <span key={index}>{cast.nameRu || cast.nameEn}, </span>
               })}
             </div>
           </div>

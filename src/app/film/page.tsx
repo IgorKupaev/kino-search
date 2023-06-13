@@ -3,10 +3,10 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import Selectors from "@/redux/Selectors";
+import Selectors from "@/redux/selectors";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { clearState } from "@/redux/features/currentFilmSlice";
-import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/mockThunks";
+import { clearState } from "@/redux/features/currentFilm/currentFilmSlice";
+import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/currentFilm/thunks";
 
 import FilmInfo from "@/components/filmInfo";
 import FilmPreview from "@/components/filmPreview";
@@ -17,16 +17,16 @@ import MainSliderLoading from "@/components/mainSlider/skeleton";
 import MainFilmsLoading from "@/components/mainFilms/skeleton";
 
 const Film = (): JSX.Element => {
-  const film = useAppSelector(Selectors.currentFilm);
-  const isActive = useAppSelector(Selectors.isActiveFilm);
-  const wallpaper = useAppSelector((state) => state.currentFilm.currentWallpaper);
+  const film = useAppSelector(Selectors.currentFilm.currentFilm);
+  const isActive = useAppSelector(Selectors.currentFilm.isActiveFilm);
+  const wallpaper = useAppSelector(Selectors.currentFilm.wallpaper);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   React.useEffect(() => {
-    if (film?.kinopoiskId) {
-      let id = String(film.kinopoiskId);
+    if (film?.filmId) {
+      let id = String(film.filmId);
       dispatch(fetchPosters(id));
       dispatch(fetchTrailers(id));
       dispatch(fetchCurrentWallpapers(id));
