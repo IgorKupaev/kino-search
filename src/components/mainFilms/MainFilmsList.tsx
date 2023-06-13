@@ -1,7 +1,7 @@
 import React from "react";
 
-import { fetchFilm } from "@/redux/features/thunks";
 import { useAppDispatch } from "@/redux/hooks";
+import { fetchFilm } from "@/redux/features/currentFilm/thunks";
 
 import MainFilmsItem from "./MainFilmsItem";
 

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchPremiers, fetchWallpapers } from "./mockThunks";
+import { fetchPremiers, fetchWallpapers } from "./thunks";
 
 import type { TImagesData, TTopFilmsState } from "@/types";
 

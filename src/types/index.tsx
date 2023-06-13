@@ -19,7 +19,7 @@ export type TCurrentFilm = {
 
   filmLength: number;
   imdbId: string;
-  kinopoiskId: number;
+  filmId: number;
   year: number;
 };
 
@@ -146,3 +146,8 @@ export type IFilmDescriptionProps = {
 export type TFilmPosters = {
   posters: TImageItem[];
 };
+
+export interface IInfoBlockProps {
+  title: string
+  body: string
+}

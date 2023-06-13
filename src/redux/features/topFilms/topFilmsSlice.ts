@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchTopFilms } from "./mockThunks";
+import { fetchTopFilms } from "./thunks";
 
 import type { TTopFilmsState } from "@/types";
 

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./mockThunks";
+import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./thunks";
 
 import { randomInteger } from "@/app/film/helper";
 
