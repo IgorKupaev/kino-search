@@ -4,8 +4,6 @@ import styles from "./FilmDescription.module.scss";
 
 import type { IInfoBlockProps } from "@/types";
 
-
-
 const InfoBlock = ({ title, body }: IInfoBlockProps): JSX.Element => {
   return (
     <div className={styles.infoBlock}>

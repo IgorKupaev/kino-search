@@ -21,7 +21,7 @@ export const topFilms = createSlice({
       })
       .addCase(fetchTopFilms.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.error = '';
+        state.error = "";
         state.films = payload;
       })
       .addCase(fetchTopFilms.rejected, (state, { payload }) => {

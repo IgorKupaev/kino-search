@@ -11,10 +11,10 @@ import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/fea
 import FilmInfo from "@/components/filmInfo";
 import FilmPreview from "@/components/filmPreview";
 import VideoTrailers from "@/components/videoTrailers";
-
-import styles from "./Film.module.scss";
 import MainSliderLoading from "@/components/mainSlider/skeleton";
 import MainFilmsLoading from "@/components/mainFilms/skeleton";
+
+import styles from "./Film.module.scss";
 
 const Film = (): JSX.Element => {
   const film = useAppSelector(Selectors.currentFilm.currentFilm);
@@ -26,7 +26,7 @@ const Film = (): JSX.Element => {
 
   React.useEffect(() => {
     if (film?.filmId) {
-      let id = String(film.filmId);
+      let id = film.filmId;
       dispatch(fetchPosters(id));
       dispatch(fetchTrailers(id));
       dispatch(fetchCurrentWallpapers(id));

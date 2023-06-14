@@ -9,11 +9,10 @@ export const fetchPremiers = createAsyncThunk<TFilm[], undefined, { rejectValue:
   async (_, { rejectWithValue }) => {
     try {
       let result;
-      await fetchData(`premiers`).then(data => {
+      await fetchData(`premiers`).then((data) => {
         result = data;
       });
       return result as unknown as TFilm[];
-
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }

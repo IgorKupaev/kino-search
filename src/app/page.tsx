@@ -14,15 +14,9 @@ import MainFilms from "@/components/mainFilms";
 import Header from "@/components/header";
 
 const Home = (): JSX.Element => {
-  const dispatch = useAppDispatch();
   const films = useAppSelector(Selectors.changeSize);
   const wallpapersIds = useAppSelector(Selectors.premiers.wallpapersIds);
   const wallpapers = useAppSelector(Selectors.premiers.wallpapersLinks);
-
-  const fetchAll = async () => {
-    await dispatch(fetchPremiers());
-    wallpapersIds && wallpapersIds.length && dispatch(fetchWallpapers(wallpapersIds));
-  };
 
   const MainSliderComponent = React.useCallback(() => {
     return wallpapers && wallpapers.length > 0 ? <MainSlider /> : <MainSliderLoading />;
@@ -31,6 +25,13 @@ const Home = (): JSX.Element => {
   const MainFilmsComponent = React.useCallback(() => {
     return films && films.length > 0 ? <MainFilms /> : <MainFilmsLoading />;
   }, [films]);
+
+  const dispatch = useAppDispatch();
+
+  const fetchAll = async () => {
+    await dispatch(fetchPremiers());
+    wallpapersIds && wallpapersIds.length && dispatch(fetchWallpapers(wallpapersIds));
+  };
 
   React.useEffect(() => {
     dispatch(fetchTopFilms());

@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 
 const Slider = (): JSX.Element => {
   const wallpapersLinks = useAppSelector(Selectors.premiers.wallpapersLinks);
+  
   return (
     <Swiper spaceBetween={0} slidesPerView={1} modules={[Navigation, A11y, Autoplay]} navigation autoplay>
       {wallpapersLinks?.map((link) => (
