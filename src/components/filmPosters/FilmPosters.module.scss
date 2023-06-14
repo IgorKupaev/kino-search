@@ -1,0 +1,22 @@
+.posters {  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.postersItem {
+  flex: 0 0 175.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 39px;
+}
+.filmPosters {
+  flex: 0 0 535px;
+}
+.title {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 19px;
+}

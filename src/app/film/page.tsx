@@ -1,49 +1,65 @@
 "use client";
 
 import React from "react";
-
-import Selectors from "@/redux/Selectors";
-import { useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 
-import FilmPreview from "@/components/filmPreview";
-import { calculateSize, setRatingColor } from "./helper";
+import Selectors from "@/redux/selectors";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { clearState } from "@/redux/features/currentFilm/currentFilmSlice";
+import { fetchCurrentWallpapers, fetchPosters, fetchTrailers } from "@/redux/features/currentFilm/thunks";
 
-import type { FC } from "react";
-import type { TSize } from "@/types";
+import FilmInfo from "@/components/filmInfo";
+import FilmPreview from "@/components/filmPreview";
+import VideoTrailers from "@/components/videoTrailers";
+import MainSliderLoading from "@/components/mainSlider/skeleton";
+import MainFilmsLoading from "@/components/mainFilms/skeleton";
 
 import styles from "./Film.module.scss";
-import VideoTrailers from "@/components/videoTrailers";
-import FilmDescription from "@/components/filmDescription";
 
-const Film: FC = (): JSX.Element => {
-  const [size, setSize] = React.useState<TSize>({ width: 0, height: 0 });
-  const [cover, setCover] = React.useState<string>("");
-  const [logo, setLogo] = React.useState<string>("");
+const Film = (): JSX.Element => {
+  const film = useAppSelector(Selectors.currentFilm.currentFilm);
+  const isActive = useAppSelector(Selectors.currentFilm.isActiveFilm);
+  const wallpaper = useAppSelector(Selectors.currentFilm.wallpaper);
 
-  const film = useAppSelector(Selectors.currentFilm);
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   React.useEffect(() => {
-    calculateSize(setSize, window.innerWidth);
-  }, []);
+    if (film?.filmId) {
+      let id = film.filmId;
+      dispatch(fetchPosters(id));
+      dispatch(fetchTrailers(id));
+      dispatch(fetchCurrentWallpapers(id));
+    }
+  }, [film]);
 
   React.useEffect(() => {
-    if (film?.coverUrl) {
-      setCover(film.coverUrl);
+    if (!isActive) {
+      router.back();
     }
-    if (film?.logoUrl) {
-      setLogo(film.logoUrl);
-    }
-  }, [film, router]);
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+
+  if (!isActive) {
+    return (
+      <div className={styles.film}>
+        <div className={styles.filmContainer}>
+          <MainSliderLoading />
+          <MainFilmsLoading />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.film}>
       <div className={styles.filmContainer}>
-        {film && <FilmPreview cover={cover} logo={logo} width={size.width} height={size.height} film={film} />}
+        <FilmPreview wallpaper={wallpaper} film={film} />
+        <VideoTrailers />
+        <FilmInfo />
       </div>
-      {film && <VideoTrailers />}
-      {film && <FilmDescription film={film} />}
     </div>
   );
 };

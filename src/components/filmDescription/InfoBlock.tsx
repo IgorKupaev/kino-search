@@ -1,20 +1,15 @@
 import React from "react";
 
-import type { FC } from "react";
-
 import styles from "./FilmDescription.module.scss";
 
-interface IInfoBlockProps {
-  title: string
-  body: string
-}
+import type { IInfoBlockProps } from "@/types";
 
-const InfoBlock: FC<IInfoBlockProps> = ({ title, body }): JSX.Element => {
+const InfoBlock = ({ title, body }: IInfoBlockProps): JSX.Element => {
   return (
-    <>
+    <div className={styles.infoBlock}>
       <h3 className={styles.jobTitle}>{title}</h3>
       <div className={styles.jobBody}>{body}</div>
-    </>
+    </div>
   );
 };
 

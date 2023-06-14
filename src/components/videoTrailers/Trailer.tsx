@@ -1,11 +1,10 @@
 import React from "react";
 
-import type { ITrailerProps } from "@/types";
-import type { FC } from "react";
+import styles from "./VideoTrailers.module.scss";
 
-import styles from './VideoTrailers.module.scss';
+import type { TTrailerProps } from "@/types";
 
-const Trailer: FC<ITrailerProps> = ({ title, id }): JSX.Element => {
+const Trailer = ({ title, id }: TTrailerProps): JSX.Element => {
   return (
     <div className={styles.trailer}>
       <h3 className={styles.trailerTitle}>{title}</h3>

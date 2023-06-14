@@ -2,12 +2,11 @@
 
 import Header from "@/components/header";
 
-import type { FC } from "react";
-import type { IRootProps } from "@/types";
+import styles from "./Film.module.scss";
 
-import styles from './Film.module.scss';
+import type { TRootProps } from "@/types";
 
-const RootLayout: FC<IRootProps> = ({ children }): JSX.Element => {
+const RootLayout = ({ children }: TRootProps): JSX.Element => {
   return (
     <div className={styles.containerStyle}>
       <Header isTransparent={true} />

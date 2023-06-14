@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProfessions } from "./actionCreators";
-import { ProfessionState } from "@/types";
+import { fetchProfessions } from "./thunks";
 
-const initialState: ProfessionState = {
+import type { TProfessionState } from "@/types";
+
+const initialState: TProfessionState = {
   isLoading: false,
   error: "",
   professions: [],
 };
 
 export const currentProfessions = createSlice({
-  name: "currentProfessions",
+  name: "current-professions",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -22,9 +23,13 @@ export const currentProfessions = createSlice({
         state.isLoading = true;
         state.professions = payload;
       })
-      .addCase(fetchProfessions.rejected, (state, { payload }: any) => {
+      .addCase(fetchProfessions.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = payload.message ? payload.message : "Unknown error";
+        if (typeof payload === "string") {
+          state.error = payload;
+        } else {
+          state.error = "Unknown error";
+        }
       });
   },
 });
