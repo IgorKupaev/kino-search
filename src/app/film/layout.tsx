@@ -2,7 +2,7 @@
 
 import Header from "@/components/header";
 
-import styles from './Film.module.scss';
+import styles from "./Film.module.scss";
 
 import type { TRootProps } from "@/types";
 

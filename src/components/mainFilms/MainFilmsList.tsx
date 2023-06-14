@@ -7,14 +7,14 @@ import Selectors from "@/redux/selectors";
 import MainFilmsItem from "./MainFilmsItem";
 
 const MainFilmsList = (): JSX.Element => {
-  const dispatch = useAppDispatch();
   const films = useAppSelector(Selectors.changeSize);
+  const dispatch = useAppDispatch();
   return (
     <>
       {films.map((film) => {
         const src = film.posterUrl;
         const fetchCurrentFilm = (): void => {
-          dispatch(fetchFilm(`${film.filmId}`));
+          dispatch(fetchFilm(film.filmId));
         };
         return <MainFilmsItem key={film.filmId} fetchFilm={fetchCurrentFilm} film={film} src={src} />;
       })}

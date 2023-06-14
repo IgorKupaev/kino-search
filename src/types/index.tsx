@@ -1,3 +1,5 @@
+import { Theme } from "@emotion/react";
+import { SxProps } from "@mui/material";
 import React from "react";
 
 export type TCurrentFilm = {
@@ -34,7 +36,7 @@ export type TProfession = {
 };
 
 export type TState = {
-  id: string;
+  id: string | number;
   isLoading: boolean;
   error: string;
   film?: TCurrentFilm;
@@ -151,3 +153,11 @@ export interface IInfoBlockProps {
   title: string
   body: string
 }
+
+export type TSkeletonListProps = {
+  sx: SxProps<Theme> | undefined;
+  variant: "rectangular" | "rounded";
+  width: number | string;
+  height: number | string;
+  count: number;
+};

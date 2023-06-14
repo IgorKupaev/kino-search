@@ -1,11 +1,10 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { fetchData } from "../helper";
 
 import type { TCurrentFilm, TErrorApi, TImageItem } from "@/types";
 
-export const fetchFilm = createAsyncThunk<TCurrentFilm, string, { rejectValue: TErrorApi }>(
+export const fetchFilm = createAsyncThunk<TCurrentFilm, string | number, { rejectValue: TErrorApi }>(
   "fetchFilm",
   async (id, { rejectWithValue }) => {
     try {
@@ -21,7 +20,7 @@ export const fetchFilm = createAsyncThunk<TCurrentFilm, string, { rejectValue: T
   }
 );
 
-export const fetchPosters = createAsyncThunk<TImageItem[], string, { rejectValue: TErrorApi }>(
+export const fetchPosters = createAsyncThunk<TImageItem[], string | number, { rejectValue: TErrorApi }>(
   "fetchPosters",
   async (id, { rejectWithValue }) => {
     try {
@@ -35,7 +34,7 @@ export const fetchPosters = createAsyncThunk<TImageItem[], string, { rejectValue
   }
 );
 
-export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: TErrorApi }>(
+export const fetchTrailers = createAsyncThunk<string[], string | number, { rejectValue: TErrorApi }>(
   "fetchTrailers",
   async (id, { rejectWithValue }) => {
     try {
@@ -47,7 +46,7 @@ export const fetchTrailers = createAsyncThunk<string[], string, { rejectValue: T
   }
 );
 
-export const fetchCurrentWallpapers = createAsyncThunk<TImageItem[], string, { rejectValue: TErrorApi }>(
+export const fetchCurrentWallpapers = createAsyncThunk<TImageItem[], string | number, { rejectValue: TErrorApi }>(
   "fetchCurrentWallpapers",
   async (id) => {
     const response = await fetchData(`wallpapers?filmId=${id}`);

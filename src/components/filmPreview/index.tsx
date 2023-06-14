@@ -15,7 +15,7 @@ const FilmPreview = ({ wallpaper, film }: TFilmPreviewProps): JSX.Element => {
 
   const isAllFetched = React.useMemo(() => {
     return wallpapers && wallpapers.length > 0 && wallpaper && film;
-  }, [wallpaper, wallpapers]);
+  }, [wallpaper, wallpapers, film]);
 
   if (!isAllFetched) {
     return <FilmPreviewLoading />;
@@ -25,20 +25,17 @@ const FilmPreview = ({ wallpaper, film }: TFilmPreviewProps): JSX.Element => {
     <div className={styles.filmPreview}>
       <div className={styles.filmCover}>
         <div className={styles.ImageContainer}>
-          {wallpaper && (
-            <Image
-              className={styles.filmCoverImage}
-              src={wallpaper}
-              priority
-              fill
-              alt={film && film.nameEn ? `${film.nameEn}` : "film wallpaper"}
-            />
-          )}
-          {film && (
-            <div className={styles.filmName}>
-              <h3>{film.nameRu || film.nameEn || film.nameOriginal}</h3>
-            </div>
-          )}
+          <Image
+            className={styles.filmCoverImage}
+            src={wallpaper}
+            priority
+            fill
+            alt={film && film.nameEn ? film.nameEn : "film wallpaper"}
+          />
+
+          <div className={styles.filmName}>
+            <h3>{film!.nameRu || film!.nameEn || film!.nameOriginal}</h3>
+          </div>
         </div>
       </div>
     </div>

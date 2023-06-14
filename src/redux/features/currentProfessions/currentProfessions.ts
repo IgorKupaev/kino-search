@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchProfessions } from "./thunks";
-import { TProfessionState } from "@/types";
+
+import type { TProfessionState } from "@/types";
 
 const initialState: TProfessionState = {
   isLoading: false,

@@ -1,11 +1,10 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { fetchData } from "../helper";
 
-import type { TErrorApi, TCurrentFilm, TProfession, TFilm, TImageItem } from "@/types";
+import type { TErrorApi, TProfession } from "@/types";
 
-export const fetchProfessions = createAsyncThunk<TProfession[], string, { rejectValue: TErrorApi }>(
+export const fetchProfessions = createAsyncThunk<TProfession[], string | number, { rejectValue: TErrorApi }>(
   "fetchProfessions",
   async (id, { rejectWithValue }) => {
     try {
