@@ -16,18 +16,20 @@ const FilmInfo = (): JSX.Element => {
   const currentWallpaper = useAppSelector(Selectors.currentFilm.currentWallpapers);
 
   const isAllFetched = React.useMemo(() => {
-    return wallpapers && wallpapers.length > 0 && currentWallpaper.length > 0 && film
-  }, [wallpapers, currentWallpaper, film])
-
-  if (!isAllFetched) {
-    return <FilmInfoLoading />;
-  }
+    return wallpapers && wallpapers.length > 0 && currentWallpaper.length > 0 && film;
+  }, [wallpapers, currentWallpaper, film]);
 
   return (
-    <div className={styles.filmInfo}>
-      {film && <FilmDescription film={film} />}
-      {film && <FilmPosters posters={posters} />}
-    </div>
+    <>
+      {!isAllFetched ? (
+        <FilmInfoLoading />
+      ) : (
+        <div className={styles.filmInfo}>
+          {film && <FilmDescription />}
+          {film && <FilmPosters posters={posters} />}
+        </div>
+      )}
+    </>
   );
 };
 

@@ -42,23 +42,21 @@ const Film = (): JSX.Element => {
     };
   }, []);
 
-  if (!isActive) {
-    return (
-      <div className={styles.film}>
-        <div className={styles.filmContainer}>
-          <MainSliderLoading />
-          <MainFilmsLoading />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.film}>
       <div className={styles.filmContainer}>
-        <FilmPreview wallpaper={wallpaper} film={film} />
-        <VideoTrailers />
-        <FilmInfo />
+        {isActive ? (
+          <>
+            <FilmPreview wallpaper={wallpaper} film={film} />
+            <VideoTrailers />
+            <FilmInfo />
+          </>
+        ) : (
+          <>
+            <MainSliderLoading />
+            <MainFilmsLoading />
+          </>
+        )}
       </div>
     </div>
   );

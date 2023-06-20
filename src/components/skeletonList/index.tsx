@@ -1,5 +1,5 @@
-import { Theme } from "@emotion/react";
-import { Skeleton, SxProps } from "@mui/material";
+import { TSkeletonListProps } from "@/types";
+import { Skeleton } from "@mui/material";
 import React from "react";
 
 
@@ -10,8 +10,8 @@ const SkeletonList = ({ sx, variant, width, height, count }: TSkeletonListProps)
 
   return (
     <>
-      {countArray.map(() => (
-        <Skeleton sx={sx} variant={variant} width={width} height={height} />
+      {countArray.map((_, i) => (
+        <Skeleton key={i} sx={sx} variant={variant} width={width} height={height} />
       ))}
     </>
   );

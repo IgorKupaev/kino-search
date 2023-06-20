@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { fetchData } from "../helper";
+import { fetchData } from "../../api";
 
 import type { TErrorApi, TFilm } from "@/types";
 

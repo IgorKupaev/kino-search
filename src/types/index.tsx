@@ -93,7 +93,7 @@ export type THeaderProps = {
 };
 
 export type TMainFilmsItemProps = {
-  fetchFilm: () => void;
+  fetchFilm: React.MouseEventHandler<HTMLAnchorElement>;
   film: TFilm;
   src: string;
 };
@@ -151,7 +151,7 @@ export type TFilmPosters = {
 
 export interface IInfoBlockProps {
   title: string
-  body: string
+  body: string | number
 }
 
 export type TSkeletonListProps = {

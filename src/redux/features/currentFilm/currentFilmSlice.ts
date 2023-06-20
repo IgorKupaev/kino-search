@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
 import { fetchFilm, fetchPosters, fetchTrailers, fetchCurrentWallpapers } from "./thunks";
 import { randomInteger } from "@/app/film/helper";

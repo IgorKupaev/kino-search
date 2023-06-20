@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { fetchData } from "../helper";
+import { fetchData } from "../../api";
 
 import type { TCurrentFilm, TErrorApi, TImageItem } from "@/types";
 
@@ -8,12 +8,9 @@ export const fetchFilm = createAsyncThunk<TCurrentFilm, string | number, { rejec
   "fetchFilm",
   async (id, { rejectWithValue }) => {
     try {
-      let result;
-
-      await fetchData(`topFilms?filmId=${id}`).then((data) => {
-        result = data[0];
-      });
-      return result as unknown as TCurrentFilm;
+     const resp =  await fetchData(`topFilms?filmId=${id}`);
+     console.log(resp);
+      return resp[0];
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }
@@ -25,9 +22,8 @@ export const fetchPosters = createAsyncThunk<TImageItem[], string | number, { re
   async (id, { rejectWithValue }) => {
     try {
       const response = await fetchData(`posters?filmId=${id}`);
-      const result = response[0].items;
-      result.length = 6;
-      return result;
+      response[0].items.length = 6;
+      return response[0].items;
     } catch (e) {
       return rejectWithValue(e as TErrorApi);
     }

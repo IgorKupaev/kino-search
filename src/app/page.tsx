@@ -18,6 +18,8 @@ const Home = (): JSX.Element => {
   const wallpapersIds = useAppSelector(Selectors.premiers.wallpapersIds);
   const wallpapers = useAppSelector(Selectors.premiers.wallpapersLinks);
 
+  const dispatch = useAppDispatch();
+
   const MainSliderComponent = React.useCallback(() => {
     return wallpapers && wallpapers.length > 0 ? <MainSlider /> : <MainSliderLoading />;
   }, [wallpapers]);
@@ -25,8 +27,6 @@ const Home = (): JSX.Element => {
   const MainFilmsComponent = React.useCallback(() => {
     return films && films.length > 0 ? <MainFilms /> : <MainFilmsLoading />;
   }, [films]);
-
-  const dispatch = useAppDispatch();
 
   const fetchAll = async () => {
     await dispatch(fetchPremiers());

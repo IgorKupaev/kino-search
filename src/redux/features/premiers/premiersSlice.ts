@@ -41,7 +41,7 @@ export const premiers = createSlice({
       })
       .addCase(fetchWallpapers.fulfilled, (state, { payload }) => {
         const result: string[] = [];
-        JSON.parse(JSON.stringify(payload)).forEach((item: { data: TImagesData[] }) => {
+        payload.forEach((item: { data: TImagesData[] }) => {
           if (item.data[0].total > 0) {
             result.push(item.data[0].items[0].imageUrl);
           }
